@@ -9,25 +9,19 @@ double butelka(double cm)
     return 10 - (cm - 2) * (cm - 2);
 }
 
-double volume(unsigned int nr_of_rectangles, unsigned int a, unsigned int b)
+double volume(double a, double b)
 {
-    double h = (b-a)/(double)nr_of_rectangles;
-    //cout<<"b-a: "<<b-a;
-    double result = 0;
-
-   // cout << "krok: h=" << h << endl;
-
-    for(unsigned int i = 1; i<=nr_of_rectangles; ++i)
-    {
-        result += butelka(a + i*h)*h;
-        //cout<<"Result: "<<result<<endl;
-    }
-
-    return result;
+	double f = butelka((a+b)/2);
+	return (b-a) * f * f;
 }
+
 
 int main()
 {
+	std::ios_base::sync_with_stdio(false);
+    std::cout.tie(nullptr);
+    std::cin.tie(nullptr);
+
     unsigned int max_volume;
     double filled_volume;
 
@@ -53,9 +47,7 @@ int main()
         double x;
         cin>>x;
 
-        filled_volume += volume(100, 0, x);
-
-        cout<<filled_volume<<endl;
+        filled_volume += PI * volume(0, x);
 
         if(filled_volume > max_volume)
         {
